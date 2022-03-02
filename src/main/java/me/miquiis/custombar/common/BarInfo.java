@@ -72,6 +72,8 @@ public class BarInfo {
         this.text = text;
     }
 
+    public void setRgbColor(int[] rgbColor) { this.rgbColor = rgbColor; }
+
     public UUID getUniqueID() {
         return uniqueID;
     }
@@ -82,6 +84,11 @@ public class BarInfo {
 
     public float getPercent() {
         return percent;
+    }
+
+    public String getFormattedPercent()
+    {
+        return "" + ((int)percent * 100);
     }
 
     public int[] getRawColor() {

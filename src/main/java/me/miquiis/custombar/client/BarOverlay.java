@@ -6,6 +6,7 @@ import me.miquiis.custombar.common.BarInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 public class BarOverlay extends AbstractGui {
 
@@ -27,7 +28,7 @@ public class BarOverlay extends AbstractGui {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.client.getTextureManager().bindTexture(barInfo.getTexture());
         this.drawBars(matrixStack, k, j, barInfo);
-        ITextComponent itextcomponent = barInfo.getText();
+        ITextComponent itextcomponent = new StringTextComponent(barInfo.getText().getString().replace("%PERCENT%", barInfo.getFormattedPercent()));
         int l = this.client.fontRenderer.getStringPropertyWidth(itextcomponent);
         int i1 = i / 2 - l / 2;
         int j1 = j - 11;

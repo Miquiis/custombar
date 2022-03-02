@@ -68,6 +68,18 @@ public class BarManager {
         return id;
     }
 
+    public static UUID addBar(UUID id, ITextComponent text, float percent, ServerPlayerEntity player, ResourceLocation texture, int[] rgbColor, boolean shouldSave)
+    {
+        BarInfo barInfo = new BarInfo(id, text, percent, texture, rgbColor, shouldSave);
+        currentActiveBars.put(id, barInfo);
+
+        DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> {
+            BarNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SendBarUpdate(barInfo, SendBarUpdate.BarUpdate.ADD));
+        });
+
+        return id;
+    }
+
     public static void removeBar(String name)
     {
         BarInfo barInfo = getBarInfo(name);
@@ -124,6 +136,19 @@ public class BarManager {
         barInfo.setDeleteAfterDeath(removeOnDeath);
         DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> {
             BarNetwork.CHANNEL.send(PacketDistributor.ALL.noArg(), new SendBarUpdate(barInfo, SendBarUpdate.BarUpdate.UPDATE));
+        });
+    }
+
+    public static void updateBar(UUID barId, ServerPlayerEntity player, float percent, ITextComponent text, int[] rgbColor)
+    {
+        BarInfo barInfo = currentActiveBars.get(barId);
+        if (barInfo == null) return;
+        barInfo.setPercent(percent);
+        barInfo.setText(text);
+        barInfo.setRgbColor(rgbColor);
+
+        DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> {
+            BarNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SendBarUpdate(barInfo, SendBarUpdate.BarUpdate.UPDATE));
         });
     }
 
