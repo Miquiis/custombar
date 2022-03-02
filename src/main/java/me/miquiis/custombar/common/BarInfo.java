@@ -70,6 +70,10 @@ public class BarInfo {
 
     public void setPlayer(UUID playerID) { this.playerID = playerID; }
 
+    public void setTexture(ResourceLocation texture) {
+        this.texture = texture;
+    }
+
     public void setText(ITextComponent text)
     {
         this.text = text;

@@ -148,13 +148,14 @@ public class BarManager {
         });
     }
 
-    public static void updateBar(UUID barId, ServerPlayerEntity player, float percent, ITextComponent text, int[] rgbColor)
+    public static void updateBar(UUID barId, ServerPlayerEntity player, float percent, ITextComponent text, ResourceLocation resourceLocation, int[] rgbColor)
     {
         BarInfo barInfo = currentActiveBars.get(barId);
         if (barInfo == null) return;
         barInfo.setPercent(percent);
         barInfo.setText(text);
         barInfo.setRgbColor(rgbColor);
+        barInfo
 
         DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> {
             BarNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SendBarUpdate(barInfo, SendBarUpdate.BarUpdate.UPDATE));
