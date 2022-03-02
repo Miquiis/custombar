@@ -155,7 +155,7 @@ public class BarManager {
         barInfo.setPercent(percent);
         barInfo.setText(text);
         barInfo.setRgbColor(rgbColor);
-        barInfo
+        barInfo.setTexture(resourceLocation);
 
         DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> {
             BarNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SendBarUpdate(barInfo, SendBarUpdate.BarUpdate.UPDATE));
