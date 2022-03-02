@@ -80,6 +80,15 @@ public class BarManager {
         return id;
     }
 
+    public static BarInfo getBarInfoByPlayer(UUID playerID)
+    {
+        for (BarInfo barInfo : currentActiveBars.values())
+        {
+            if (barInfo.playerID.equals(playerID)) return barInfo;
+        }
+        return null;
+    }
+
     public static void removeBar(String name)
     {
         BarInfo barInfo = getBarInfo(name);

@@ -14,6 +14,7 @@ public class BarInfo {
     private static final int[] DEFAULT_TEXT_COLOR = new int[]{255,255,255};
 
     private final UUID uniqueID;
+    protected UUID playerID;
     protected ITextComponent text;
     protected float percent;
     protected int[] rgbColor;
@@ -67,6 +68,8 @@ public class BarInfo {
         this.percent = percent;
     }
 
+    public void setPlayer(UUID playerID) { this.playerID = playerID; }
+
     public void setText(ITextComponent text)
     {
         this.text = text;
@@ -89,6 +92,10 @@ public class BarInfo {
     public String getFormattedPercent()
     {
         return "" + ((int)percent * 100);
+    }
+
+    public UUID getPlayerID() {
+        return playerID;
     }
 
     public int[] getRawColor() {
