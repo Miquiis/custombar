@@ -84,7 +84,7 @@ public class BarManager {
     {
         for (BarInfo barInfo : currentActiveBars.values())
         {
-            if (barInfo.playerID.equals(playerID)) return barInfo;
+            if (barInfo.playerID != null && barInfo.playerID.equals(playerID)) return barInfo;
         }
         return null;
     }
@@ -156,6 +156,7 @@ public class BarManager {
         barInfo.setText(text);
         barInfo.setRgbColor(rgbColor);
         barInfo.setTexture(resourceLocation);
+        barInfo.setPlayer(player.getUniqueID());
 
         DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> {
             BarNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SendBarUpdate(barInfo, SendBarUpdate.BarUpdate.UPDATE));
