@@ -95,7 +95,7 @@ public class BarInfo {
 
     public String getFormattedPercent()
     {
-        return "" + ((int)percent * 100);
+        return "" + Math.round(percent * 100);
     }
 
     public UUID getPlayerID() {
