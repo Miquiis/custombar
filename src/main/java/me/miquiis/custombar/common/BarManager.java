@@ -68,9 +68,9 @@ public class BarManager {
         return id;
     }
 
-    public static UUID addBar(UUID id, ITextComponent text, float percent, ServerPlayerEntity player, ResourceLocation texture, int[] rgbColor, boolean shouldSave)
+    public static UUID addBar(UUID id, String stringID, ITextComponent text, float percent, ServerPlayerEntity player, ResourceLocation texture, int[] rgbColor, boolean shouldSave)
     {
-        BarInfo barInfo = new BarInfo(id, text, percent, texture, rgbColor, shouldSave);
+        BarInfo barInfo = new BarInfo(id, stringID, text, percent, texture, rgbColor, shouldSave);
         barInfo.setPlayer(player.getUniqueID());
         currentActiveBars.put(id, barInfo);
 
