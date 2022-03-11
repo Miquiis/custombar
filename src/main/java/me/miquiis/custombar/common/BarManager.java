@@ -90,6 +90,15 @@ public class BarManager {
         return null;
     }
 
+    public static BarInfo getBarInfoByID(String stringID)
+    {
+        for (BarInfo barInfo : currentActiveBars.values())
+        {
+            if (barInfo.stringID != null && barInfo.stringID.equals(stringID)) return barInfo;
+        }
+        return null;
+    }
+
     public static void removeBar(String name)
     {
         BarInfo barInfo = getBarInfo(name);

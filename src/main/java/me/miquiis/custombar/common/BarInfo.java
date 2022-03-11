@@ -15,6 +15,7 @@ public class BarInfo {
 
     private final UUID uniqueID;
     protected UUID playerID;
+    protected String stringID;
     protected ITextComponent text;
     protected float percent;
     protected int[] rgbColor;
@@ -38,6 +39,7 @@ public class BarInfo {
     public BarInfo(UUID uniqueID, ITextComponent text, float percent, int[] rgbColor)
     {
         this.uniqueID = uniqueID;
+        this.stringID = null;
         this.text = text;
         this.percent = percent;
         this.rgbColor = rgbColor == null ? DEFAULT_TEXT_COLOR : rgbColor;
@@ -55,6 +57,13 @@ public class BarInfo {
     {
         this(uniqueID, text, percent, texture, rgbColor);
         this.shouldSave = shouldSave;
+    }
+
+    public BarInfo(UUID uniqueID, String stringID, ITextComponent text, float percent, ResourceLocation texture, int[] rgbColor, boolean shouldSave)
+    {
+        this(uniqueID, text, percent, texture, rgbColor);
+        this.shouldSave = shouldSave;
+        this.stringID = stringID;
     }
 
     public void setTargetEntity(@Nullable UUID targetEntity) {
