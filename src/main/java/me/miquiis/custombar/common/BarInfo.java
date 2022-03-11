@@ -123,6 +123,10 @@ public class BarInfo {
         return shouldSave;
     }
 
+    public String getStringID() {
+        return stringID;
+    }
+
     @Nullable
     public UUID getTargetEntity() {
         return targetEntity;

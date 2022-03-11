@@ -26,6 +26,7 @@ public class SendBarUpdate {
         buffer.writeEnumValue(message.barUpdate);
         if (message.barUpdate == BarUpdate.UPDATE) return;
         buffer.writeUniqueId(message.barInfo.getUniqueID());
+        buffer.writeString(message.barInfo.getStringID());
         buffer.writeTextComponent(message.barInfo.getText());
         buffer.writeFloat(message.barInfo.getPercent());
         buffer.writeString(message.barInfo.getTexture().toString());
@@ -36,7 +37,7 @@ public class SendBarUpdate {
     public static SendBarUpdate decode(PacketBuffer buffer)
     {
         BarUpdate barUpdate = buffer.readEnumValue(BarUpdate.class);
-        BarInfo barInfo = new BarInfo(buffer.readUniqueId(), buffer.readTextComponent(), buffer.readFloat(), new ResourceLocation(buffer.readString()), buffer.readVarIntArray(), buffer.readBoolean());
+        BarInfo barInfo = new BarInfo(buffer.readUniqueId(), buffer.readString(), buffer.readTextComponent(), buffer.readFloat(), new ResourceLocation(buffer.readString()), buffer.readVarIntArray(), buffer.readBoolean());
         return new SendBarUpdate(barInfo, barUpdate);
     }
 
