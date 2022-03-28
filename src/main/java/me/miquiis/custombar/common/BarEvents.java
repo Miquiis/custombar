@@ -25,14 +25,6 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = CustomBar.MOD_ID)
 public class BarEvents {
 
-    private static Minecraft client;
-
-    private static Minecraft getClient()
-    {
-        if (client == null) client = Minecraft.getInstance();
-        return client;
-    }
-
     @SubscribeEvent
     public static void onCommandRegister(RegisterCommandsEvent event)
     {
@@ -75,17 +67,6 @@ public class BarEvents {
             }
         }
         if (toDelete != null) BarManager.removeBar(toDelete.getUniqueID());
-    }
-
-    @SubscribeEvent
-    public static void onGUIRender(RenderGameOverlayEvent.Text event)
-    {
-        Minecraft client = getClient();
-        int currentBar = 1;
-        for (BarInfo barInfo : BarManager.getCurrentActiveBars().values())
-        {
-            new BarOverlay(client, barInfo).draw(event.getMatrixStack(), currentBar++);
-        }
     }
 
     @SubscribeEvent
