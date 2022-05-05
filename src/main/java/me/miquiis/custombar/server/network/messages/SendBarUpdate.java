@@ -26,7 +26,7 @@ public class SendBarUpdate {
         buffer.writeEnumValue(message.barUpdate);
         if (message.barUpdate == BarUpdate.UPDATE) return;
         buffer.writeUniqueId(message.barInfo.getUniqueID());
-        buffer.writeString(message.barInfo.getStringID());
+        buffer.writeString(message.barInfo.getStringID() == null ? message.barInfo.getUniqueID().toString() : message.barInfo.getStringID());
         buffer.writeTextComponent(message.barInfo.getText());
         buffer.writeFloat(message.barInfo.getPercent());
         buffer.writeString(message.barInfo.getTexture().toString());
